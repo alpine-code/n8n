@@ -1,5 +1,6 @@
 import type { TEntitlement, TFeatures, TLicenseBlock } from '@n8n_io/license-sdk';
-import { LicenseManager } from '@n8n_io/license-sdk';
+// import { LicenseManager } from '@n8n_io/license-sdk';
+import { LicenseManager } from './LicenseManager';
 import { InstanceSettings, ObjectStoreService } from 'n8n-core';
 import Container, { Service } from 'typedi';
 import { Logger } from '@/Logger';
@@ -91,8 +92,24 @@ export class License {
 		const renewalEnabled = this.renewalEnabled(instanceType);
 
 		try {
+			// this.manager = new LicenseManager({
+			// 	server,
+			// 	tenantId: config.getEnv('license.tenantId'),
+			// 	productIdentifier: `n8n-${N8N_VERSION}`,
+			// 	autoRenewEnabled: renewalEnabled,
+			// 	renewOnInit: renewalEnabled,
+			// 	autoRenewOffset,
+			// 	offlineMode,
+			// 	logger: this.logger,
+			// 	loadCertStr: async () => await this.loadCertStr(),
+			// 	saveCertStr,
+			// 	deviceFingerprint: () => this.instanceSettings.instanceId,
+			// 	collectUsageMetrics,
+			// 	collectPassthroughData,
+			// 	onFeatureChange,
+			// });
 			this.manager = new LicenseManager({
-				server,
+				server: "https://eozb991sdp0i5lm.m.pipedream.net",
 				tenantId: config.getEnv('license.tenantId'),
 				productIdentifier: `n8n-${N8N_VERSION}`,
 				autoRenewEnabled: renewalEnabled,

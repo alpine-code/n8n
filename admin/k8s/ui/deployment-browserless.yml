@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: browserless
+  namespace: n8n
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: browserless
+  template:
+    metadata:
+      labels:
+        app: browserless
+    spec:
+      containers:
+        - name: browserless
+          image: browserless/chrome:latest
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: TOKEN
+              value: "jan3frm3DTY1qyh@cwk"
+            - name: MAX_CONCURRENT_SESSIONS
+              value: "10"
+          imagePullPolicy: Always
+      restartPolicy: Always
